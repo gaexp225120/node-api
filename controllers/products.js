@@ -1,10 +1,18 @@
+const Product = require("../models/products");
+
 const getAllProductsStatic = async (req, res) => {
-  throw new Error("testing async errors");
+  const products = await MyModel.find({ price: { $gt: 150 } }).exec();
+  console.log(products);
   res.status(200).json({ msg: "products testing route" });
 };
 
 const getAllProducts = async (req, res) => {
-  res.status(200).json({ msg: "products route" });
+  const { type } = req.query();
+  const products = await Product.find(
+    { name: /${type}/i },
+    "name price"
+  ).exec();
+  res.status(200).json({ msg: "products", data: products });
 };
 
 module.exports = {

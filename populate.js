@@ -10,10 +10,11 @@ const start = async () => {
     //connect DB
     await connectDB(process.env.MONGO_URL);
     await Product.insertMany(jsonProducts);
-
-    console.log("Connect Success");
+    console.log("Create success");
+    process.exit(0);
   } catch (error) {
     console.log(error);
+    process.exit(1);
   }
 };
 
